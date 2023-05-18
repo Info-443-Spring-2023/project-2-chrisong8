@@ -17,7 +17,7 @@ For further information about Firebase JavaScript SDK, the primary resource is i
 ### Component Diagram
 |![System Diagram](UML_1.png) |
 |:--:|
-| _Figure 2: UML Component Diagram Part 1_|
+| _Figure 1: UML Component Diagram Part 1_|
 |![System Diagram](UML_2.png) |
 | _Figure 2: UML Component Diagram Part 2_|
 
