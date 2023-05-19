@@ -86,6 +86,26 @@ With many applications using Firebase, it’s important to ensure that system is
 
 ---
 ## Architectural Assessment
+1. Single Responsibility Principle
+The Single Responsibility Principle as one of the 5 SOLID design principles in software engineering refers to the idea that every function/class/module should be responsible to one, and only one, purpose. There should never be more than one reason for a class to change. Therefore, classes should be designed in such a way that every class serves a singular purpose. 
+
+For one, within each module/class, there are functions with a single responsibility. There is a function called signInWithEmailAndPassword() that handles signing in with email and password with help from another internal Firebase package that signs in and takes various inputs. There are other functions such as signInWithEmailLink() that cover logging in with other information using that same package, but these functions are kept distinctly separate from the aforementioned signIn() using email and password. 
+
+On a module level, each module is also divided into specific, different modules depending on which feature they cover. For example, it is divided into features such as firebase-firestore, firebase-functions, etc. The firebase-firestore will only handle operations (and nothing else) related to the database component of Firebase, such as storing and syncing data to the Cloud Firestore database provided. The firebase-functions handles only operations for event-driven activities. The Single Responsibility Principle is emphasized by the fact that firestore can be used to trigger functions, implying that they are maintained separate and singular in responsibility.
+
+2. Open Closed Principle
+The Open Closed Principle states that classes should be open for extension but closed for modification. Basically, classes should be developed such that it allows behavior to be extended without needing to alter its underlying source code. For example when adding new functionalities, new derived classes should be inherited from the original base class. 
+
+In terms of this SDK, firebase-auth module provides various signin methods in auth.ts as mentioned in the section above: email and password, phone, Google, Facebook, etc. Each of these methods can extend the base authentication functionality from a higher level. The base authentication functionality can't (and shouldn't) be modified, but can be built upon by developers to include other auth providers for user credentials in signInWithCustom().
+
+In firebase-firestore, it uses security rules to allow developers to control their database access. However, it has a flexible ruleset that can be extended to match external projects, such that developers can define how data is structured and when data can be read or written to. The actual Firestore's ruleset is closed for modification, but the flexible rules can be implemented directly through the Firebase CLI or through .rules files deployed to Firebase.
+
+3. Dependency Inversion Principle
+The Dependency Inversion Principle states that high-level modules should not depend on low level modules. Instead, both should depend on abstractions; details should depend on abstractions. This is because when a class knows about the design and implementation of another, it is likely that changes to a class will compromise the working capability of the other class. Therefore, it is best practice to loosely couple the high-level and low-level modules.
+
+In the SDK, this principle can be seen when higher-level APIs interact with lower-level APIs through abstraction. For example, when initializing Firebase App Instances, each can be configured with different settings. At a code level, these can include things like API keys and project IDs. The high-level modules like firebase-auth and firebase-performance do not depend on a specific Firebase App instance. However, it is easy to customize your own instances as a developer by adding your own configs. Therefore, the system is more flexible as you can switch instances when initializing a service. 
+
+In firebase-functions, this principle can also be seen in its service for storing/retrieving user data. For example, it implements an HttpCallable() function that is a Google Cloud trigger function that is triggered when an HTTP request is invoked. However, the method in which HTTP is invoked does not directly depend on what method is used to make network requests. Therefore, a developer does not need to worry about low-level network functionality when dealing with high-level storage functionality provided by Firebase.
 
 ---
 ## System Improvement
