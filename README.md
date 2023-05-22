@@ -83,6 +83,22 @@ With many applications using Firebase, it’s important to ensure that system is
 
 ---
 ## Identify Styles & Patterns Used
+High-level architectural styles that are identified in the Firebase Javascript SDK is the client-server and event-based architectural styles, while design patterns used within the codebase are the adapter and facade pattern.
+
+### Architectural Styles
+**Client-server**: The client-server architecture is a style that consists of the system being divided into main components: the client and the server. In this style, the client represents the user interface or the front-end component that interacts with the users, and is responsible for presenting information to the user, handling user input as well as server requests. The server represents the back-end components and focuses on processing requests from the client and managing data. In addition to these components, client-server architecture also includes connectors and constraints. 
+
+There are different areas where it is evident that the client-server architecture style is being applied within the Firebase Javascript SDK. One instance can be observed with the Realtime Database and the Cloud Firestore database which both follow a client-server model. When either the Realtime Database or the Cloud Firestore have a set of initial security rules selected, these permission settings are overwritten in the storage. 
+The Firebase Authentication is also another key example of client-server architecture as it handles user input for the sake of user authentication and authorization. Clients interact with the Firebase Authentication by performing various sign-in actions. The client-side code communicates with the server-side infrastructure to verify user credentials and perform authentication.
+
+**Event-based**: The event-based style is one where components within the system generate events which represent major occurrences or changes in the system. These events can include user actions, system events, or any other information that would be interpreted as notifications. The event-based style promotes scalability since components can be added or removed without affecting the overall system. This style is suitable for systems that require real-time processing and the handling of complex event flows which are characteristics of the Firebase Javascript SDK. 
+
+An example of the usage of event-based architecture within the Firebase Javascript SDK is the Realtime Database and the Cloud Firestore which are real-time NoSQL databases provided by Firebase. These databases utilize event-based architecture as changes in the data trigger events that propagate to connected clients in real-time. For example, clients can subscribe to specific events such as someone adding or removing events and also receive updates for whenever their subscribed data is changed. This is event-driven in the form of immediate data updates and data synchronization. 
+
+### Design Patterns
+**Adapter Pattern**: The adapter pattern is one design pattern that is used within the Firebase Javascript SDK. Adapter patterns allow classes that usually would be incompatible to work together. It does this by converting the interface of a class into an interface that the client expects. The Firebase Javascript SDK uses the adapter pattern to provide a consistent interface for accessing Firebase services. It essentially acts as an adapter between the Firebase services and the client-side Javascript code. The SDK provides adapter classes that wrap around the native database APIs, and allows the client-side Javascript code to interact with the databases. These specific adapters handle the conversion of data and requests between the Firebase service and the client-side code. 
+
+Another instance of when adapters are used is in the relationship between the Real-time Database and the Cloud Firestore and the Javascript SDK. The SDK provides adapter classes that wrap around the native database APIs similar to the aforementioned usage of adapters. However, these adapters handle tasks such as user-up, sign-in, token generations, and other tasks related to server-side infrastructure.
 
 ---
 ## Architectural Assessment
