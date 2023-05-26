@@ -123,5 +123,22 @@ In the SDK, this principle can be seen when higher-level APIs interact with lowe
 
 In firebase-functions, this principle can also be seen in its service for storing/retrieving user data. For example, it implements an HttpCallable() function that is a Google Cloud trigger function that is triggered when an HTTP request is invoked. However, the method in which HTTP is invoked does not directly depend on what method is used to make network requests. Therefore, a developer does not need to worry about low-level network functionality when dealing with high-level storage functionality provided by Firebase.
 
+4. Interface Segregation Principle
+This principle states that clients should not be forced to depend on interfaces that they do not use. This principle therefore promotes the decoupling of modules and enhances readibility and maintainability.
+
+The Firebase SDK is designed in a modular way, meaning that users can import and use only the specific services that are needed in their apps. For example, if the user only needs firebase-auth, they can only import that service and not the other components of the SDK like firebase-functions. This adheres to the ISP since the app is prevented from depending on other parts of the SDK that it does not use. The code below is an example.
+
+`import firebase from 'firebase/app';
+import 'firebase/auth';`
+
+The SDK also has service-specific APIs. This means that each separate Firebase service has its own API that is specific to that functionality. For example, firebase-firestore has its own API for querying and managing data, while firebase-auth has its own API for logging in and out. This adheres to the ISP because each service has its own API that does not require another API in another functionality to work.
+
+5. Liskov Substitution Principle
+This principle states that "subtypes must be substitutable for their base types." This means that if software uses a base class, it should be able to use any of its subclasses without the program knowing, and without affecting correctness of the program.
+
+The SDK conforms to the LSP indirectly, since JavaScript is not strictly object-oriented. It however does support prototypal inheritance. The SDK still makes use of the LSP through the way its APIs are structured. In firebase-firestore, there is a `DocumentSnapshot` class that has several basic methods like get(), set(), and update(). This has a subclass called `QueryDocumentSnapshot` that extends it; both have the same get() method. This is a direct example of LSP, since `QueryDocumentSnapshot` can be used anywhere `DocumentSnapshot` is expected to be used.
+
+Another example in the SDK's Realtime Database is where it provides Reference and Query objects, which both have on() and off() and once() methods. Reference extends Query, such that all instances of References are also instances of Query and can be used wherever Query is expected. Most notably, you can pass in a Reference object to a function that expects a Query object without issues. This is a concrete example of the LSP.
+
 ---
 ## System Improvement
