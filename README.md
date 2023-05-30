@@ -15,51 +15,42 @@ For further information about Firebase JavaScript SDK, the primary resource is i
 ---
 ## Development View
 ### Component Diagram
-|![System Diagram](UML_1.png) |
+|![Component Diagram](UML.png) |
 |:--:|
-| _Figure 1: UML Component Diagram Part 1_|
-|![System Diagram](UML_2.png) |
-| _Figure 2: UML Component Diagram Part 2_|
+| _Figure 1: UML Component Diagram_|
 
 
-| Component  | Description |
-| ------------- |:-------------:|
-| `index.ts`     | The entry point for the package. This entry point is defined in each file inside the `firebase` package, which imports and exports functionalities from all other Firebase SDKs. |
-| `Firebase App`     | The core component that initializes the Firebase SDK and manages the application state. All other Firebase services are dependent on this component. The Firebase App initializes instances of all other components and services, providing a gateway to Firebase's functionality. |
-| `index.cdn.ts`     | The entry point for the app. This acts similar to `index.ts` in app, but it provides component that is important for initialization through CDN(Content Delivery Network.) |
-| `Firebase Auth`     | This component provides a full suite of services for user authentication. It supports various authentication methods, including email and password, phone numbers, and popular federated identity providers like Google and Facebook. |
-| `cordova`     | This component provides a similar services as OAuth, but it provides full suite of services for user authentication in Cordova environment.|
-| `react-native`     | This component provides a similar services as OAuth, but it provides full suite of services for user authentication in React-Native environment.|
-| `Firebase Firestore`     | Cloud-hosted NoSQL database that enables the syncing of data across client apps in real-time. This ensures that the user's view of the data is always up-to-date, regardless of the network state. |
-| `lite`     | Provides lightweight, standalone REST-only Firestore SDK that supports single document fetches, query execution, and document updates, at a fraction of the regular Web SDK size. |
-| `Firebase Storage`     | Firebase Storage service provides robust, secure, and easy-to-use file uploads and downloads for Firebase apps. It's backed by Google Cloud Storage. |
-| `Firebase Messaging`     | Provides services regarding deliver messages and notifications at no cost. It is used for sending notifications and messages to users across platforms — Android, iOS, and the web. |
-| `sw`     |  Service Workers(sw) provides key component of Progressive Web Apps (PWAs), and handles push notifications and interacting with the Firebase Cloud Messaging (FCM) service.|
-| `Firebase Functions`     | Provides serverless framework that lets you run your code in the cloud. May create functions that trigger on Firebase product events, HTTPS requests, or on a schedule . |
-| `Firebase Analytics`     | Provides insights into app usage and user engagement. It enables you to understand how people use your iOS or Android app.|
-| `Firebase Performance`     | Provides insights into the performance characteristics of your applications. It enables you to understand where and when the performance of your app can be improved so that you can use that information to fix performance issues. |
-| `Firebase Remote Config`     | Provides cloud service that lets you change the behavior and appearance of your app without requiring users to download an app update. |
-| `Firebase App Check`     | Works to protect your Firebase resources from abuse, such as billing fraud or phishing. It does this by asserting that incoming traffic is coming from your app, and blocking traffic that does not have a valid attestation. |
-| `Firebase Compat`     | Ensures compatibility between the older "namespace" style SDK and the newer "modular" style SDK.  |
-| `Firebase Installations`     | Provides service that generates a unique identifier for each app instance in your project. These identifiers are used by Firebase services to identify individual instances of your app |
-| `package.json`      | Defines the package's metadata like its name, version, dependencies, scripts, etc. Also points to the main entry point file of the module.     |
-| `gulpfile.js`      | A configuration file for the Gulp task runner.     |
-| `rollup.config.js`     | Contains the configuration for Rollup, the module bundler used to bundle the Firebase JavaScript SDK.     |
-| `tsconfig.json`     | File that configures the TypeScript compiler options and provide the necessary settings for compiling the TypeScript source code into JavaScript. |
+| Component | Description |
+|---|---|
+| `api.ts` | Contains the main functions for initializing and managing Firebase apps. |
+| `firebaseApp.ts` | Defines the FirebaseAppImpl class which represents a Firebase app instance. |
+| `constants.ts` | Contains constant values used in other components. |
+| `errors.ts` | Handles errors that occur within the Firebase app. |
+| `logger.ts` | Handles logging for the Firebase app. |
+| `platformLoggerService.ts` | Implements the logging service for the Firebase platform. |
+| `public-types.ts` | Defines public types used in other components. |
+| `registerCoreComponents.ts` | Handles the registration of core components in the Firebase app. |
+| `types.ts` | Defines additional types used in other components. |
+| `heartbeatService.ts` | Implements the service for sending periodic heartbeats. |
+| `index.ts` | Entry point for the module. |
+| `indexeddb.ts` | Contains functions for working with IndexedDB. |
+| `internal.ts` | Contains internal functions for the Firebase app. |
 
 ### Dependencies
-The Firebase SDK has strong interdependencies, with Firebase App being the primary dependency for all other components. Each component can be used individually (except for Firebase App, which is necessary for initializing the platform), but many are designed to work together.
+- The Firebase SDK has strong interdependencies, with Firebase App being the primary dependency for all other components. Each component can be used individually (except for Firebase App, which is necessary for initializing the platform), but many are designed to work together.
 
 ### High-level Codeline Model:
-- The Firebase JavaScript SDK follows a modular architecture, which organizes code into independent packages (modules) based on the functionality provided by each. Every module represents a Firebase service and is contained within its own directory. 
+- Firebase JavaScript SDK follows a modular design. Each feature or service of Firebase has its own separate module. This design makes it possible for developers to import and use only the features they need, thus potentially reducing the size of their JavaScript bundles. The main codeline for the Firebase JavaScript SDK is hosted on GitHub and is open-source.
 
 ### Testing and Configuration
-- The SDK uses various tools for testing such as Mocha, Chai, and Sinon. The tests can be found in the test directory in each service's directory.
+- The SDK uses various tools for testing such as Mocha, Chai, and Sinon. 
 - ESLint and Prettier are used for linting and formatting.
 - Rollup is used for bundling the JavaScript code.
-- The configuration for it can be found in the `tsconfig.json`, `rollup.config.js`, `gulpfile.js`file.
+- The configuration for it can be found in the `tsconfig.json`, `rollup.config.js` file.
 
-Tests are typically located in the `test` directory of each individual package. Automated tests are run using the `yarn test` command at the root level. Running `yarn run lint` works for testing code linting.
+All the files with a `.test.ts` extension are test files for the corresponding TypeScript modules. These are used to ensure the correctness of the code in the respective modules. Automated tests are run using the `yarn test` command at the root level. Running `yarn run lint` works for testing code linting.
+
+As for configuration, Firebase provides a variety of options that can be passed during the initialization of the Firebase app. These include Firebase project settings like API key, auth domain, database URL, project ID, storage bucket, and messaging sender ID.
 
 ---
 ## Applied Perspective
