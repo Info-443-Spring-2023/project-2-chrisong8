@@ -48,7 +48,7 @@ For further information about Firebase JavaScript SDK, the primary resource is i
 - Rollup is used for bundling the JavaScript code.
 - The configuration for it can be found in the `tsconfig.json`, `rollup.config.js` file.
 
-All the files with a `.test.ts` extension are test files for the corresponding TypeScript modules. These are used to ensure the correctness of the code in the respective modules. Automated tests are run using the `yarn test` command at the root level. Running `yarn run lint` works for testing code linting.
+All the files with a `.test.ts` extension are test files for the corresponding TypeScript modules. These are used to ensure the correctness of the code in the respective modules. Before running the app, you need `node` version between `10.15.0` and `16.6.0`, and `yarn` version should be between `1.0.0` and `1.22.11`. After, you should install dependencies by running `$ yarn` and build by `yarn build`. Afterward, you may run Automated tests. Automated tests are run using the `yarn test` command at the root level. Running `yarn run lint` works for testing code linting.
 
 As for configuration, Firebase provides a variety of options that can be passed during the initialization of the Firebase app. These include Firebase project settings like API key, auth domain, database URL, project ID, storage bucket, and messaging sender ID.
 
