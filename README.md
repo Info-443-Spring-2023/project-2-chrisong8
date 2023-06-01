@@ -133,3 +133,10 @@ Another example in the SDK's Realtime Database is where it provides Reference an
 
 ---
 ## System Improvement
+
+Changes Made| Why|
+|--|--|
+|Refactoring: Replace Magic Literal|In `packages/functions/src/service.ts`, there was hardcoded value of 70000, meaning 70s as timeout. However, without comment, there is no obvious meaning. Hence, This variable makes it hard to understand the purpose of the variable and shows the need to refactor for the code. The 70000 variable has been named as constant variable `DEFAULT_TIMEOUT_MS`, and replaced the magic variable in the code. 
+|--|--|
+|--|--|
+|--|--|
