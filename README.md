@@ -61,15 +61,74 @@ Our applied perspective that we focus around is Evolution. We focus on this pers
 
 Firebase can be used in many different supportive system architectures, and there are many different types of risk that can be involved and associated with it. Thus the ability to identify the dimensions of change required can narrow the problem to be tractable. There are many different dimensions of changes, but for this particular system, these felt the most important.
 
-    Growth:
+> **Growth:**
         With how huge and the continued growth of Firebase is being used, it’s important to take into consideration of the increased number of users to take into consideration of a large amount of data.
 
-	Integration:
+> **Integration:**
         With Firebase being a huge backend containing data, it’s important that it can be integrated with numerous amount of other systems to be used. This is used in grabbing data from Firebase on a realtime database or user data for application to process.
 
-Reliability of Change:
+**Reliability of Change:**
 
 With many applications using Firebase, it’s important to ensure that system is continuing to keep working even after a small change. Thus including automated testing, stable development environments, and effective management is key to ensure that there isn’t a negative impact on a system.
+
+### Applying the perspective
+
+In documenting some aspect of the systems there were two approaches, **Characterize the Evolution Needs** and **Access the current ease of Evolution**.
+
+**Characterize the Evolution Needs**
+
+Accessing each type of evolution
+
+| Functional Evolution|| 
+|--|--|
+|Type of change required:|Defect correction|
+|Magnitude of change required:|Magnitude of 10|
+|Likelihood of change score|15|
+|Timescale of required changes:|Time Scale 1 month|
+
+| Platform Evolution || 
+|--|--|
+|Type of change required:|Large Scale|
+|Magnitude of change required:|Magnitude of 60|
+|Likelihood of change score|5|
+|Timescale of required changes:|Time Scale 12 months|
+
+| Integration Evolution || 
+|--|--|
+|Type of change required:|Large Scale|
+|Magnitude of change required:|Magnitude of 60|
+|Likelihood of change score|5|
+|Timescale of required changes:|Time Scale 12 months|
+|Other Nodes| Open-ended requirements for integrating systems that need to be required.|
+
+| Growth || 
+|--|--|
+|Type of change required:|Large Scale|
+|Magnitude of change required:|Magnitude of 30|
+|Likelihood of change score|10|
+|Timescale of required changes:|Time Scale 3 months|
+
+**Assess the current ease of Evolution**
+
+Importance of Evolution:
+
+> Most information systems need to be integrated with a number of other systems to be useful. This may involve retrieving information from systems on demand, processing the outputs of other systems, or providing information for other systems to process. As these other systems are created, evolve, and are removed, this may put evolution pressures on your system, so that although it does not have to change its functionality, it may need to change the way it integrates with other systems.
+
+Potential Scenario:
+
+> As the app gains popularity and user engagement increases, the development team realizes the need to enhance the app's functionality. To facilitate real-time collaboration among users, the team integrates Firebase Cloud Messaging (FCM) into the app. FCM enables sending push notifications to users' devices, allowing instant updates and notifications whenever there are new app updates, messages, or relevant events
+
+Potential Step: In corresponding to Scenario 
+> They decide to integrate Firebase Cloud Firestore, a NoSQL document database, to improve data querying and scalability. This integration allows them to easily store and retrieve complex data structures, perform advanced queries, and handle large datasets.
+
+Questions based on Steps: 
+
+How much will the system change?
+- The system would change in integrating new features that notify users.
+
+How difficult and risky is the result?
+- The difficultly and risk of the project will result in being a somewhat considerate task. In taking into consideration of the risk is more inline of security. In ensuring there’s isn’t any information leak coming out.
+
 
 
 ---
