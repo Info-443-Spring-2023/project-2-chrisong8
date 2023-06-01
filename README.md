@@ -137,6 +137,6 @@ Another example in the SDK's Realtime Database is where it provides Reference an
 Changes Made| Why|
 |--|--|
 |Refactoring: Replace Magic Literal|In `packages/functions/src/service.ts`, there was hardcoded value of 70000, meaning 70s as timeout. However, without comment, there is no obvious meaning. Hence, This variable makes it hard to understand the purpose of the variable and shows the need to refactor for the code. The 70000 variable has been named as constant variable `DEFAULT_TIMEOUT_MS`, and replaced the magic variable in the code. 
-|--|--|
+|Refactoring: Extract Function|In `packages/auth/src/core/strategies/email_and_password.ts`, has the function `sendPasswordResetEmail()`. This function can be found as an long function of which making the function difficult to understand. Thus the function was extracted of putting parts of the functions that can go together. This results in making three new function `onCheckActionCode()`, `  awaitEmailPasswordReset()`, and `onCheckAuthentication()` in order to make the long function simple to understand.|
 |--|--|
 |--|--|
